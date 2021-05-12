@@ -20,7 +20,6 @@ public class StringGenv421 {
 	private static void generateString(String writeToFile, int stringAmount, int stringLength, int stringType) {
 
 		int rand, selection = 0;
-		String list = "";
 
 		switch (writeToFile.toLowerCase()) {
 			case "true":
@@ -61,8 +60,7 @@ public class StringGenv421 {
 									}
 									break;
 								case 7: //All
-									//selection = (int) Math.floor((Math.random() * 3) + 1);
-									selection = 100;
+									selection = (int) Math.floor((Math.random() * 3) + 1);
 									break;
 								default: //error for invalid type
 									System.out.println("Invalid string generation type. Valid types are: 1 (Letters Only),"
