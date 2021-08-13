@@ -31,6 +31,7 @@ public class StringGen {
 	private static void generateStrings(String writeToFile, int stringAmount, int stringLength, int stringType) {
 
 		int rand, selection = 0;
+		String character = "";
 
 		switch (writeToFile.toLowerCase()) {
 			case "true":case "yes":case "y":case "1":
@@ -45,31 +46,17 @@ public class StringGen {
 						bw.write("String #"+(i+1)+": ");
 
 						for (int i1 = 0; i1 < stringLength; i1++) {
-							selection = pickCharacter(stringType);
-
-							switch (selection) {
-								case 1:
-									rand = (int) Math.floor((Math.random() * randomLetter.length));
-									System.out.print(randomLetter[rand]);
-									bw.write(randomLetter[rand]);
-									break;
-								case 2:
-									rand = (int) Math.floor((Math.random() * randomNumber.length));
-									System.out.print(randomNumber[rand]);
-									bw.write(randomNumber[rand]);
-									break;
-								case 3:
-									rand = (int) Math.floor((Math.random() * randomSymbol.length));
-									System.out.print(randomSymbol[rand]);
-									bw.write(randomSymbol[rand]);
-									break;
-								default: 
-									System.out.println("Selection error.\nPlease report issue on https://github.com/ew0345/RandomStringGenerator/issues with the title: \'Selection Error: selection was "+selection+"\'.");
-									bw.close();
-									if (stringFile.exists()) stringFile.delete();
-									System.exit(0);
-									break;
+							selection = pickType(stringType);
+							character = pickCharacter(selection);
+							
+							if (character == "ohno") {
+								bw.close();
+								if (stringFile.exists()) stringFile.delete();
+								System.exit(0);
 							}
+
+							System.out.print(character);
+							bw.write(character);
 						}
 						System.out.print("\n");
 						bw.newLine();
@@ -85,26 +72,12 @@ public class StringGen {
 					System.out.print("String #"+(i+1)+": ");
 
 					for (int i1 = 0; i1 < stringLength; i1++) {
-						selection = pickCharacter(stringType);
-						
-						switch (selection) {
-							case 1:
-								rand = (int) Math.floor((Math.random() * randomLetter.length));
-								System.out.print(randomLetter[rand]);
-								break;
-							case 2:
-								rand = (int) Math.floor((Math.random() * randomNumber.length));
-								System.out.print(randomNumber[rand]);
-								break;
-							case 3:
-								rand = (int) Math.floor((Math.random() * randomSymbol.length));
-								System.out.print(randomSymbol[rand]);
-								break;
-							default: 
-								System.out.println("Selection error.\nPlease report issue on https://github.com/ew0345/RandomStringGenerator/issues with the title: \'Selection Error: selection was "+selection+"\'.");
-								System.exit(0);
-								break;
-						}
+						selection = pickType(stringType);
+						character = pickCharacter(selection);
+
+						if (character == "ohno") System.exit(0);
+
+						System.out.print(character);
 					}
 					System.out.println("\n");
 				}
@@ -137,7 +110,7 @@ public class StringGen {
 		}
 	}
 
-	private static int pickCharacter(int stringType) {
+	private static int pickType(int stringType) {
 		int selection = 100; //Default to 100 (incase of error)
 		switch(stringType) {
 			case 1: //letters only
@@ -175,6 +148,30 @@ public class StringGen {
 				break;
 		}
 		return selection;
+	}
+
+	private static String pickCharacter(int selection) {
+		int rand;
+		String c = "";
+		switch (selection) {
+			case 1:
+				rand = (int) Math.floor((Math.random() * randomLetter.length));
+				c  = randomLetter[rand];
+				break;
+			case 2:
+				rand = (int) Math.floor((Math.random() * randomNumber.length));
+				c = randomNumber[rand];
+				break;
+			case 3:
+				rand = (int) Math.floor((Math.random() * randomSymbol.length));
+				c = randomSymbol[rand];
+				break;
+			default:
+				System.out.println("Selection error.\nPlease report issue on https://github.com/ew0345/RandomStringGenerator/issues with the title: \'Selection Error: selection was "+selection+"\'.");
+				c = "ohno";
+				break;
+		}
+		return c;
 	}
 
 	private static void displayInfo() {
