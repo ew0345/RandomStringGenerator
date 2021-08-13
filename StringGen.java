@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 
 public class StringGen {
-	final static String version = "4.2.2";
+	final static String version = "4.2.3";
 
 	static String[] randomLetter = {"A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z","a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"};
 	static String[] randomNumber = {"0","1","2","3","4","5","6","7","8","9"};
@@ -14,7 +14,13 @@ public class StringGen {
 
 	public static void main(String[] args) {
 		if (args.length == 4) {
-			generateStrings(args[0], Integer.parseInt(args[1]), Integer.parseInt(args[2]), Integer.parseInt(args[3]));
+			int[] strGenInf = new int[4];
+
+			for (int i = 1; i < args.length; i++) {
+				strGenInf[i] = Integer.parseInt(args[i]);
+			}
+
+			generateStrings(args[0], strGenInf[1], strGenInf[2], strGenInf[3]);
 		} else if (args.length > 0 && args[0].contains("--info") || args.length > 0 && args[0].contains("/?")) {
 			displayInfo();
 		} else {
@@ -39,41 +45,7 @@ public class StringGen {
 						bw.write("String #"+(i+1)+": ");
 
 						for (int i1 = 0; i1 < stringLength; i1++) {
-							switch(stringType) {
-								case 1: //letters only
-									selection = 1;
-									break;
-								case 2: //numbers only
-									selection = 2;
-									break;
-								case 3: //symbols only
-									selection = 3;
-									break;
-								case 4: //letters & numbers
-									selection = (int) Math.floor((Math.random() * 2) + 1);
-									break;
-								case 5: //letters & symbols
-									selection = (int) Math.floor((Math.random() * 2) + 1);
-									if (selection == 2) selection = 3;
-									break;
-								case 6: //numbers & symbols
-									selection = (int) Math.floor((Math.random() * 2) + 1);
-									if (selection == 1) {
-										selection = 2;
-									} else if (selection == 2) {
-										selection = 3;
-									}
-									break;
-								case 7: //All
-									selection = (int) Math.floor((Math.random() * 3) + 1);
-									break;
-								default: //error for invalid type
-									System.out.println("Invalid string generation type. Valid types are: 1 (Letters Only),"
-															+" 2 (Numbers Only), 3 (Symbols Only), 4 (Letters and Numbers), "
-															+"5 (Letters and Symbols), 6 (Numbers and Symbols), 6 (All).");
-									System.exit(0);
-									break;
-							}
+							selection = pickCharacter(stringType);
 
 							switch (selection) {
 								case 1:
@@ -113,41 +85,7 @@ public class StringGen {
 					System.out.print("String #"+(i+1)+": ");
 
 					for (int i1 = 0; i1 < stringLength; i1++) {
-						switch (stringType) {
-							case 1: //letters only
-								selection = 1;
-								break;
-							case 2: //numbers only
-								selection = 2;
-								break;
-							case 3: //symbols only
-								selection = 3;
-								break;
-							case 4: //letters & numbers
-								selection = (int) Math.floor((Math.random() * 2) + 1);
-								break;
-							case 5: //letters & symbols
-								selection = (int) Math.floor((Math.random() * 2) + 1);
-								if (selection == 2) selection = 3;
-								break;
-							case 6: //numbers & symbols
-								selection = (int) Math.floor((Math.random() * 2) + 1);
-								if (selection == 1) {
-									selection = 2;
-								} else if (selection == 2) {
-									selection = 3;
-								}
-								break;
-							case 7: //All
-								selection = (int) Math.floor((Math.random() * 3) + 1);
-								break;
-							default: //error for invalid type
-								System.out.println("Invalid string generation type. Valid types are: 1 (Letters Only),"
-														+" 2 (Numbers Only), 3 (Symbols Only), 4 (Letters and Numbers), "
-														+"5 (Letters and Symbols), 6 (Numbers and Symbols), 6 (All).");
-								System.exit(0);
-								break;
-						}
+						selection = pickCharacter(stringType);
 						
 						switch (selection) {
 							case 1:
@@ -197,6 +135,46 @@ public class StringGen {
 			System.out.println("D:");
 			e.printStackTrace();
 		}
+	}
+
+	private static int pickCharacter(int stringType) {
+		int selection = 100; //Default to 100 (incase of error)
+		switch(stringType) {
+			case 1: //letters only
+				selection = 1;
+				break;
+			case 2: //numbers only
+				selection = 2;
+				break;
+			case 3: //symbols only
+				selection = 3;
+				break;
+			case 4: //letters & numbers
+				selection = (int) Math.floor((Math.random() * 2) + 1);
+				break;
+			case 5: //letters & symbols
+				selection = (int) Math.floor((Math.random() * 2) + 1);
+				if (selection == 2) selection = 3;
+				break;
+			case 6: //numbers & symbols
+				selection = (int) Math.floor((Math.random() * 2) + 1);
+				if (selection == 1) {
+					selection = 2;
+				} else if (selection == 2) {
+					selection = 3;
+				}
+				break;
+			case 7: //All
+				selection = (int) Math.floor((Math.random() * 3) + 1);
+				break;
+			default: //error for invalid type
+				System.out.println("Invalid string generation type. Valid types are: 1 (Letters Only),"
+										+" 2 (Numbers Only), 3 (Symbols Only), 4 (Letters and Numbers), "
+										+"5 (Letters and Symbols), 6 (Numbers and Symbols), 7 (All).");
+				System.exit(0);
+				break;
+		}
+		return selection;
 	}
 
 	private static void displayInfo() {
