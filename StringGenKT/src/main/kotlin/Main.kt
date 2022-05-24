@@ -1,3 +1,4 @@
+package stringGenKT.src.main.kotlin
 /*
 * Author: Ew0345
 */
@@ -10,7 +11,7 @@ fun main(args: Array<String>) {
        val stringLength: Int = args[2].toInt()
        val stringType: Int = args[3].toInt()
 
-       // Give arguments to GenerateStrings()
+       // Give arguments to stringGenKT.src.main.kotlin.GenerateStrings()
        GenerateStrings().main(writeToFile, stringAmount, stringLength, stringType)
 
    } else if (args.size == 1 && args[0].equals("--info", true) || args.size == 1 && args[0].equals("--help", true)) {
