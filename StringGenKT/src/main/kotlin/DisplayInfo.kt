@@ -1,3 +1,4 @@
+package stringGenKT.src.main.kotlin
 /*
 * Author: Ew0345
 */

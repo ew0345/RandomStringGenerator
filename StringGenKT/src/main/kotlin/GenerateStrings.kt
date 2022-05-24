@@ -1,3 +1,5 @@
+package stringGenKT.src.main.kotlin
+
 import java.io.File
 import java.util.*
 import kotlin.random.Random
