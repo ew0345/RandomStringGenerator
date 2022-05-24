@@ -31,3 +31,9 @@ If the first argument is `--info` then other arguments must not be present.
 &nbsp;&nbsp; 9: Letters & symbols only  
 &nbsp;&nbsp; 10: Numbers & symbols only  
 &nbsp;&nbsp; 11: All
+
+
+Version information:  
+&nbsp;&nbsp; Java version: StringGen.java. This is the current latest java version.  
+&nbsp;&nbsp; Old Kotlin version: StringGen.kt. This is old kotlin version, has feature parity with the java version.  
+&nbsp;&nbsp; New Kotlin version: StringGen folder. This is the current latest version of the new Kotlin version, has feature parity with the other versions as well as additional `stringType` options and more infomative `--info`.
