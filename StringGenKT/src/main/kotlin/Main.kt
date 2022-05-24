@@ -13,7 +13,7 @@ fun main(args: Array<String>) {
        // Give arguments to GenerateStrings()
        GenerateStrings().main(writeToFile, stringAmount, stringLength, stringType)
 
-   } else if (args.isEmpty() || args.size == 1 && args[0].equals("--info", true)) {
+   } else if (args.size == 1 && args[0].equals("--info", true) || args.size == 1 && args[0].equals("--help", true)) {
        // Display info about the program
        DisplayInfo().main()
    } else {
