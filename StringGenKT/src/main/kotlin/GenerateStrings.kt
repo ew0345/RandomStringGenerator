@@ -10,7 +10,7 @@ import kotlin.random.Random
 */
 class GenerateStrings {
     private val stringFile = File(System.getProperty("user.home")+"/Desktop/RandomStrings.txt")
-    private val debug = true
+    private val debug = false
 
     fun main(writeToFile: String, stringAmount: Int, stringLength: Int, stringType: Int) {
         if (debug) println ("writeToFile: $writeToFile, stringAmount: $stringAmount, stringLength: $stringLength, stringType: $stringType")
