@@ -10,7 +10,7 @@ import kotlin.random.Random
 */
 class GenerateStrings {
     private val stringFile = File(System.getProperty("user.home")+"/Desktop/RandomStrings.txt")
-    private val debug = true
+    private val debug = false
 
     fun main(writeToFile: String, stringAmount: Int, stringLength: Int, stringType: Int) {
         if (debug) println ("writeToFile: $writeToFile, stringAmount: $stringAmount, stringLength: $stringLength, stringType: $stringType")
@@ -149,6 +149,10 @@ class GenerateStrings {
                                     3 -> writeChar (4)
                                     4 -> writeChar (5)
                                 }
+                            }
+                            else -> { // Anything above 23
+                                println("Invalid choice for stringType, please run the program again with --info to see valid choices.")
+                                exitProcess(0)
                             }
                         }
                         i1++
@@ -291,6 +295,10 @@ class GenerateStrings {
                                     3 -> print (getChar (4))
                                     4 -> print (getChar (5))
                                 }
+                            }
+                            else -> { // Anything above 23
+                                println("Invalid choice for stringType, please run the program again with --info to see valid choices.")
+                                exitProcess(0)
                             }
                         }
                         i1++
